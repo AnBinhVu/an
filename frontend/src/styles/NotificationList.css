@@ -1,0 +1,140 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  /* Container chính */
+  .notification-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tiêu đề */
+  h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Trạng thái loading */
+  .loading {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* Thông báo không có thông báo */
+  .no-notifications {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* Danh sách thông báo */
+  .notification-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Mỗi thông báo */
+  .notification-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  /* Thông báo chưa đọc */
+  .notification-list li:not(.read) {
+    background: #def3f6;
+  }
+  
+  /* Thông báo đã đọc */
+  .notification-list li.read {
+    background: #eee;
+  }
+  
+  /* Nội dung thông báo */
+  .notification-list li span {
+    font-size: 14px;
+    color: #34495e;
+    font-weight: 600;
+  }
+  
+  /* Timestamp */
+  .notification-list li small {
+    display: block;
+    font-size: 12px;
+    color: #95a5a6;
+    margin-top: 5px;
+  }
+  
+  /* Các nút hành động */
+  .notification-list li button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+    margin-left: 10px;
+  }
+  
+  /* Nút đánh dấu đã đọc */
+  .notification-list li button:first-of-type {
+    background: #3498db;
+    color: #fff;
+  }
+  
+  .notification-list li button:first-of-type:hover {
+    background: #2980b9;
+  }
+  
+  /* Nút xóa */
+  .notification-list li button:last-of-type {
+    background: #e74c3c;
+    color: #fff;
+  }
+  
+  .notification-list li button:last-of-type:hover {
+    background: #c0392b;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .notification-container {
+      padding: 15px;
+    }
+  
+    .notification-list li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .notification-list li button {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 5px;
+    }
+  }

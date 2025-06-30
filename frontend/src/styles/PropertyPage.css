@@ -1,0 +1,147 @@
+.property-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fdfdfd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .property-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .property-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .property-container input,
+  .property-container textarea,
+  .property-container select {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .property-container input:focus,
+  .property-container textarea:focus,
+  .property-container select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .property-container input[type="file"] {
+    border: none;
+  }
+  
+  .property-container button {
+    width: fit-content;
+    padding: 0.6rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .property-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .property-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .property-container li {
+    background-color: #f8f8f8;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .property-container li b {
+    color: #222;
+  }
+  
+  .property-container li button {
+    margin-right: 10px;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .property-container li button:first-of-type {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  .property-container li button:last-of-type {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .property-container li button:hover {
+    opacity: 0.9;
+  }
+  .preview-section {
+    margin-top: 1rem;
+  }
+  .preview-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .preview-img,
+  .preview-video {
+    width: 120px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  .cancel-btn {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #999;
+  }
+  .notification {
+    background-color: #e0ffe0;
+    border: 1px solid #00aa00;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    color: #007700;
+  }
+  .delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: darkred;
+  }
+  

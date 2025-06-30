@@ -1,0 +1,260 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  /* Container chính */
+  .notification-admin-container {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 24px;
+    background: #fafbfc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tiêu đề */
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 15px;
+  }
+  
+  /* Nút toggle form */
+  .form-toggle-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-btn {
+    background: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .toggle-btn:hover {
+    background: #2980b9;
+  }
+  
+  /* Form gửi broadcast và user */
+  .broadcast-form,
+  .user-form {
+    background: #f9f9f9;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 24px 0;
+    animation: slideIn 0.3s ease-in-out;
+  }
+  
+  /* Trường nhập và select */
+  .form-input,
+  .form-select {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  }
+  
+  /* Nút gửi */
+  .submit-btn {
+    background: #2ecc71;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .submit-btn:hover {
+    background: #27ae60;
+  }
+  
+  /* Kết quả gửi */
+  .form-result {
+    color: #2ecc71;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  .form-result.error {
+    color: #e74c3c;
+  }
+  
+  /* Trạng thái loading */
+  .loading {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* Bảng thông báo */
+  .notification-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notification-table th,
+  .notification-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notification-table th {
+    background: #34495e;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .notification-table tr:hover {
+    background: #f5f5f5;
+  }
+  
+  .undefined-user {
+    color: #7f8c8d;
+    font-style: italic;
+  }
+  
+  .read-status {
+    color: #2ecc71;
+  }
+  
+  .unread-status {
+    color: #e74c3c;
+  }
+  
+  /* Nút xóa */
+  .delete-btn {
+    background: #e74c3c;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .delete-btn:hover {
+    background: #c0392b;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .pagination-btn {
+    background: #3498db;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .pagination-btn:hover {
+    background: #2980b9;
+  }
+  
+  .pagination-info {
+    font-size: 14px;
+    color: #34495e;
+  }
+  
+  /* Animation cho form */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .notification-admin-container {
+      padding: 15px;
+    }
+  
+    .form-toggle-buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .toggle-btn {
+      width: 100%;
+    }
+  
+    .form-input,
+    .form-select {
+      width: 100%;
+      max-width: none;
+      margin-right: 0;
+    }
+  
+    .notification-table {
+      display: block;
+      overflow-x: auto;
+    }
+  
+    .notification-table th,
+    .notification-table td {
+      min-width: 120px;
+    }
+  
+    .pagination {
+      flex-direction: column;
+      gap: 8px;
+    }
+  
+    .pagination-btn {
+      width: 100%;
+    }
+  }
