@@ -22,9 +22,11 @@ jobs:
           node-version: '22.x'
 
       - name: 📦 Install all dependencies
-        run: npm install
-             cd frontend
-             npm install
+        run: |
+            npm install
+            cd frontend
+            npm install
+
 
       - name: ⚙️ Build React frontend
         run: npm run start
