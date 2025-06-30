@@ -21,23 +21,24 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: 📦 Install all dependencies
+      - name: 📦 Install backend & frontend dependencies
         run: |
-            npm install
-            cd frontend
-            npm install
-
+          npm install             # Cài cho backend (server.js ở root)
+          cd frontend
+          npm install             # Cài cho frontend
 
       - name: ⚙️ Build React frontend
-        run: npm run build
-
-      - name: 🗂️ Copy frontend build to backend/public
         run: |
-          mkdir -p backend/public
-          cp -r frontend/build/* backend/public/
+          cd frontend
+          npm run build
 
-      - name: 📦 Zip backend (include built frontend)
-        run: zip -r release.zip backend server.js package.json package-lock.json .env
+      - name: 🗂️ Copy frontend build to public/
+        run: |
+          mkdir -p public
+          cp -r frontend/build/* public/
+
+      - name: 📦 Zip entire app
+        run: zip -r release.zip . -x ".git/*" "node_modules/*" "frontend/node_modules/*"
 
       - name: ⬆️ Upload artifact
         uses: actions/upload-artifact@v4
@@ -61,7 +62,7 @@ jobs:
       - name: 📂 Unzip artifact
         run: unzip release.zip
 
-      - name: 📥 Install backend dependencies
+      - name: 📥 Install backend dependencies on Azure
         run: npm install
 
       - name: 🔐 Login to Azure
