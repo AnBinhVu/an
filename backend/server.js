@@ -11,14 +11,23 @@ const propertyRoutes = require('./routes/propertyRoutes');
 const path = require('path');
 const notificationRoutes = require('./routes/notificationRoutes');
 const userRoutes = require('./routes/userRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
+const sessionRoutes = require('./middleware/authMiddleware');
+const planRoutes = require('./routes/planRoutes');
+const vnpayRoutes = require("./routes/vnpayRoutes");
+
 dotenv.config();
 const app = express();
 
-connectDB(); 
+connectDB();
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+
+// ✅ Cho phép frontend gọi từ Azure hoặc localhost (khi test)
+app.use(cors({
+  origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
+  credentials: true
+}));
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -28,25 +37,16 @@ app.use(session({
   cookie: { httpOnly: true, maxAge: 600000 }
 }));
 
-// api cho đăng ký
+// Các route API
 app.use('/api/auth', authRoutes);
-
-//api cho danh mục
 app.use('/api/categories', categoryRoutes);
-
-//api cho địa điểm
 app.use('/api/locations', locationRoutes);
-
-//api cho bất động sản
 app.use('/api/properties', propertyRoutes);
-
-// api cho thông báo
 app.use('/api/notifications', notificationRoutes);
-
-//api cho user
 app.use('/api/users', userRoutes);
+app.use('/api/session', sessionRoutes);
+app.use('/api/plans', planRoutes);
+app.use('/api/payment', vnpayRoutes);
 
-//api cho thanh toán
-app.use('/api/checkout', paymentRoutes);
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
