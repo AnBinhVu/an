@@ -13,35 +13,31 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout source code
+      - name: 📥 Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: 🔧 Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
 
-      - name: Install frontend dependencies
-        run: |
-          cd frontend
-          npm install
+      - name: 📦 Install all dependencies
+        run: npm install
+             cd frontend
+             npm install
 
-      - name: Build frontend
-        run: |
-          cd frontend
-          npm run build
+      - name: ⚙️ Build React frontend
+        run: npm run start
 
-      - name: Copy React build to backend/public
+      - name: 🗂️ Copy frontend build to backend/public
         run: |
           mkdir -p backend/public
           cp -r frontend/build/* backend/public/
 
-      - name: Zip artifact for deployment
-        run: |
-          cd backend
-          zip -r ../release.zip .
+      - name: 📦 Zip backend (include built frontend)
+        run: zip -r release.zip backend server.js package.json package-lock.json .env
 
-      - name: Upload artifact for deployment job
+      - name: ⬆️ Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: node-app
@@ -55,25 +51,25 @@ jobs:
       contents: read
 
     steps:
-      - name: Download artifact from build job
+      - name: ⬇️ Download artifact
         uses: actions/download-artifact@v4
         with:
           name: node-app
 
-      - name: Unzip artifact
+      - name: 📂 Unzip artifact
         run: unzip release.zip
 
-      - name: Install backend dependencies (on Azure)
+      - name: 📥 Install backend dependencies
         run: npm install
 
-      - name: Login to Azure
+      - name: 🔐 Login to Azure
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B966A8348C8C4B84BEC5BE8642859A29 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DEA8FCB232DB4655958A3278A81E3C6E }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_AABB7212CAA844118E3B0111F58FEA3D }}
 
-      - name: Deploy to Azure Web App
+      - name: 🚀 Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'vubinhan'
