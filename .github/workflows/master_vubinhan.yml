@@ -23,6 +23,7 @@ jobs:
 
       - name: Install frontend dependencies
         run: |
+          npm i
           cd frontend
           npm install
 
