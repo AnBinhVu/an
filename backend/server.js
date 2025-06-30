@@ -25,7 +25,7 @@ connectDB();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 
-// CORS setup (Azure or localhost during dev)
+// CORS setup
 app.use(cors({
   origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
   credentials: true
@@ -33,7 +33,7 @@ app.use(cors({
 
 // Session middleware
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || 'secret',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
@@ -51,11 +51,12 @@ app.use('/api/session', sessionRoutes);
 app.use('/api/plans', planRoutes);
 app.use('/api/payment', vnpayRoutes);
 
-// Serve React frontend build from 'public' folder
-app.use(express.static(path.join(__dirname, 'public')));
+// 👉 Serve React frontend build (production)
+const frontendPath = path.join(__dirname, '../frontend/build');
+app.use(express.static(frontendPath));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 // Start server
