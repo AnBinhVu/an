@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js",                // ✅ Production dùng Node để chạy server
-    "server": "nodemon backend/server.js",    // ✅ Dùng trong dev nếu muốn
-    "client": "cd frontend && npm start",     // ✅ Dùng khi dev frontend
-    "build": "cd frontend && npm run build"   // ✅ Dùng để build React
+    "start": "node server.js",                
+    "server": "nodemon backend/server.js",    
+    "client": "cd frontend && npm start",     
+    "build": "cd frontend && npm run build"   
   },
   "dependencies": {
     "axios": "^1.8.4",
