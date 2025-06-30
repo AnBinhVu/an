@@ -23,9 +23,9 @@ jobs:
 
       - name: 📦 Install backend & frontend dependencies
         run: |
-          npm install             # Cài cho backend (server.js ở root)
+          npm install             # Install backend deps
           cd frontend
-          npm install             # Cài cho frontend
+          npm install             # Install frontend deps
 
       - name: ⚙️ Build React frontend
         run: |
@@ -37,8 +37,9 @@ jobs:
           mkdir -p public
           cp -r frontend/build/* public/
 
-      - name: 📦 Zip entire app
-        run: zip -r release.zip . -x ".git/*" "node_modules/*" "frontend/node_modules/*"
+      - name: 📦 Zip entire app (exclude node_modules/.git)
+        run: |
+          zip -r release.zip . -x "**/node_modules/**" ".git/**" ".github/**" "frontend/node_modules/**"
 
       - name: ⬆️ Upload artifact
         uses: actions/upload-artifact@v4
