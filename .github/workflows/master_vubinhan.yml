@@ -33,12 +33,12 @@ jobs:
           mkdir -p backend/public
           cp -r frontend/build/* backend/public/
 
-      - name: 📦 Install backend dependencies (prod only)
+      - name: 📦 Install backend dependencies (for validation only)
         run: |
           cd backend
           npm ci --omit=dev
 
-      - name: 📦 Zip backend (include package.json, exclude node_modules)
+      - name: 📦 Zip backend (exclude node_modules)
         run: |
           cd backend
           zip -r ../release.zip * .[^.]* -x "**/node_modules/**" "**/tests/**" "**/*.log"
@@ -62,11 +62,8 @@ jobs:
         with:
           name: node-app
 
-      - name: 📦 Extract and install backend dependencies
-        run: |
-          unzip release.zip -d backend
-          cd backend
-          npm install --omit=dev
+      - name: 📦 Extract backend code only
+        run: unzip release.zip -d backend
 
       - name: 🔐 Login to Azure
         uses: azure/login@v2
