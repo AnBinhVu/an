@@ -33,15 +33,15 @@ jobs:
           mkdir -p backend/public
           cp -r frontend/build/* backend/public/
 
-      - name: 📦 Install backend dependencies
+      - name: 📦 Install backend dependencies (prod only)
         run: |
           cd backend
-          npm ci
+          npm ci --omit=dev
 
-      - name: 📦 Zip backend app only
+      - name: 📦 Zip backend (include package.json, exclude node_modules)
         run: |
           cd backend
-          zip -r ../release.zip . -x "**/node_modules/**" "**/tests/**" "**/*.log"
+          zip -r ../release.zip * .[^.]* -x "**/node_modules/**" "**/tests/**" "**/*.log"
 
       - name: ⬆️ Upload artifact
         uses: actions/upload-artifact@v4
