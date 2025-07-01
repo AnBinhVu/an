@@ -33,12 +33,12 @@ jobs:
           mkdir -p backend/public
           cp -r frontend/build/* backend/public/
 
-      - name: 📦 Validate backend dependencies (optional but useful)
+      - name: 📦 Ensure backend lockfile exists
         run: |
           cd backend
-          npm ci --omit=dev
+          if [ ! -f package-lock.json ]; then npm install --package-lock-only; fi
 
-      - name: 📦 Zip backend (include hidden files and package.json, exclude node_modules)
+      - name: 📦 Zip backend (include hidden files, package-lock.json, exclude node_modules)
         run: |
           cd backend
           zip -r ../release.zip . -x "**/node_modules/**" "**/tests/**" "**/*.log"
@@ -62,8 +62,11 @@ jobs:
         with:
           name: node-app
 
-      - name: 📦 Extract backend code to working directory
+      - name: 📦 Extract backend code
         run: unzip release.zip -d .
+
+      - name: 📦 Install production dependencies
+        run: npm ci --omit=dev
 
       - name: 🔐 Login to Azure
         uses: azure/login@v2
