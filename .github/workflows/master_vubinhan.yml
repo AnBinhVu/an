@@ -33,15 +33,15 @@ jobs:
           mkdir -p backend/public
           cp -r frontend/build/* backend/public/
 
-      - name: 📦 Install backend dependencies (for validation only)
+      - name: 📦 Validate backend dependencies (optional but useful)
         run: |
           cd backend
           npm ci --omit=dev
 
-      - name: 📦 Zip backend (exclude node_modules)
+      - name: 📦 Zip backend (include hidden files and package.json, exclude node_modules)
         run: |
           cd backend
-          zip -r ../release.zip * .[^.]* -x "**/node_modules/**" "**/tests/**" "**/*.log"
+          zip -r ../release.zip . -x "**/node_modules/**" "**/tests/**" "**/*.log"
 
       - name: ⬆️ Upload artifact
         uses: actions/upload-artifact@v4
@@ -62,8 +62,8 @@ jobs:
         with:
           name: node-app
 
-      - name: 📦 Extract backend code only
-        run: unzip release.zip -d backend
+      - name: 📦 Extract backend code to working directory
+        run: unzip release.zip -d .
 
       - name: 🔐 Login to Azure
         uses: azure/login@v2
@@ -77,5 +77,5 @@ jobs:
         with:
           app-name: 'vubinhan'
           slot-name: 'Production'
-          package: backend
+          package: .
           clean: true
