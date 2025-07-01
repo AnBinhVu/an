@@ -21,30 +21,32 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: 📦 Install backend & frontend dependencies
+      - name: 📦 Install backend dependencies
         run: |
-          npm install             # Install backend deps
-          cd frontend
-          npm install             # Install frontend deps
+          cd backend
+          npm install
 
-      - name: ⚙️ Build React frontend
+      - name: 📦 Install and build frontend
         run: |
           cd frontend
+          npm install
           npm run build
 
-      - name: 🗂️ Copy frontend build to public/
+      - name: 🗂️ Move frontend build to backend/public/
         run: |
-          mkdir -p public
-          cp -r frontend/build/* public/
+          rm -rf backend/public
+          mkdir -p backend/public
+          cp -r frontend/build/* backend/public/
 
-      - name: 📦 Zip entire app (exclude node_modules/.git)
+      - name: 📦 Zip backend folder
         run: |
-          zip -r release.zip . -x "**/node_modules/**" ".git/**" ".github/**" "frontend/node_modules/**"
+          cd backend
+          zip -r ../release.zip . -x "**/node_modules/**"
 
       - name: ⬆️ Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
+          name: node-backend
           path: release.zip
 
   deploy:
@@ -58,13 +60,7 @@ jobs:
       - name: ⬇️ Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: node-app
-
-      - name: 📂 Unzip artifact
-        run: unzip release.zip
-
-      - name: 📥 Install backend dependencies on Azure
-        run: npm install
+          name: node-backend
 
       - name: 🔐 Login to Azure
         uses: azure/login@v2
@@ -78,4 +74,5 @@ jobs:
         with:
           app-name: 'vubinhan'
           slot-name: 'Production'
-          package: .
+          package: release.zip
+          clean: true
