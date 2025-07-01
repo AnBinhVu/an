@@ -62,6 +62,12 @@ jobs:
         with:
           name: node-app
 
+      - name: 📦 Extract and install backend dependencies
+        run: |
+          unzip release.zip -d backend
+          cd backend
+          npm install --omit=dev
+
       - name: 🔐 Login to Azure
         uses: azure/login@v2
         with:
@@ -74,5 +80,5 @@ jobs:
         with:
           app-name: 'vubinhan'
           slot-name: 'Production'
-          package: release.zip
+          package: backend
           clean: true
