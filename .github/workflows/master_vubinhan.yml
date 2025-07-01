@@ -24,7 +24,7 @@ jobs:
       - name: 📦 Install and build frontend
         run: |
           cd frontend
-          npm install
+          npm ci
           npm run build
 
       - name: 🗂️ Copy frontend build to backend/public
@@ -36,12 +36,12 @@ jobs:
       - name: 📦 Install backend dependencies
         run: |
           cd backend
-          npm install
+          npm ci
 
-      - name: 📦 Zip backend only
+      - name: 📦 Zip backend app only
         run: |
           cd backend
-          zip -r ../release.zip . -x "**/node_modules/**"
+          zip -r ../release.zip . -x "**/node_modules/**" "**/tests/**" "**/*.log"
 
       - name: ⬆️ Upload artifact
         uses: actions/upload-artifact@v4
