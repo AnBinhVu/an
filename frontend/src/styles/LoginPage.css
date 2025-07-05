@@ -1,0 +1,155 @@
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  /* Form container */
+  .login-modal {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 380px;
+    max-width: 95%;
+    position: relative;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    animation: zoomIn 0.3s ease;
+  }
+  
+  /* Animation */
+  @keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+  }
+  
+  /* Headings */
+  .login-modal h2 {
+    text-align: center;
+    margin-top: 0.3rem;
+    margin-bottom: 1.2rem;
+    color: #012448;
+  }
+  
+  .login-modal h3 {
+    text-align: center;
+    font-weight: 400;
+    color: #444;
+  }
+  
+  /* Form input */
+  .login-modal input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  /* Continue button */
+  .continue-btn {
+    width: 100%;
+    padding: 12px;
+    background: #055cb2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+      .continue-btn:hover{
+        background: #459aef;
+      }
+  
+  /* Divider */
+  .divider {
+    text-align: center;
+    margin: 1.5rem 0 1rem;
+    color: #888;
+    position: relative;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    height: 1px;
+    width: 45%;
+    background: #ccc;
+    position: absolute;
+    top: 50%;
+  }
+  .divider::before { left: 0; }
+  .divider::after { right: 0; }
+  
+  /* Social buttons */
+  .social-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    background: #fff;
+  }
+  .social-btn img {
+    width: 20px;
+    height: 20px;
+  }
+      .social-btn:hover{
+        background: #e1dfdf;
+      }
+  /* Error text */
+  .error {
+    margin-top: 1rem;
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  /* Terms */
+  .terms {
+    margin-top: 1.3rem;
+    font-size: 0.8rem;
+    color: #080000;
+    text-align: center;
+  }
+  .terms a {
+    color: #055cb2;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 4px;
+  }
+  .signup-btn{
+    border: none;
+    background: white;
+  }
+    .signup-btn:hover{
+      color: #055cb2;
+    }

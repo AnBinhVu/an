@@ -1,0 +1,242 @@
+/* Reset mặc định */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Container chính */
+.location-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Nút thêm mới */
+.add-new-btn {
+  display: inline-block;
+  background: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.add-new-btn:hover {
+  background: #2980b9;
+}
+
+/* Biểu mẫu */
+.location-form {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.location-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 5px;
+}
+
+.location-form select,
+.location-form input,
+.location-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.location-form select:focus,
+.location-form input:focus,
+.location-form textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.location-form textarea {
+  height: 100px;
+  resize: none;
+}
+
+.location-form button {
+  background: #2ecc71;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.location-form button:hover {
+  background: #27ae60;
+}
+
+/* Thông báo lỗi */
+.error-msg {
+  background: #ffe6e6;
+  color: #c0392b;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dismiss-error {
+  background: none;
+  border: none;
+  color: #c0392b;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.dismiss-error:hover {
+  color: #e74c3c;
+}
+
+/* Trạng thái loading */
+.loading {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 15px;
+}
+
+/* Thông báo không có địa điểm */
+.no-locations {
+  text-align: center;
+  color: #7f8c8d;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+/* Danh sách địa điểm */
+.location-list {
+  list-style: none;
+}
+
+.location-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.location-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.location-item span {
+  color: #34495e;
+  font-size: 14px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background: #f1c40f;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.edit-btn:hover {
+  background: #e1b107;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .location-container {
+    padding: 15px;
+  }
+
+  .add-new-btn {
+    padding: 8px;
+  }
+
+  .location-form {
+    padding: 15px;
+  }
+
+  .location-form select,
+  .location-form input,
+  .location-form textarea {
+    margin-bottom: 10px;
+  }
+
+  .location-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .button-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    flex: 1;
+    text-align: center;
+  }
+}
