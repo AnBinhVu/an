@@ -37,6 +37,11 @@ jobs:
           mkdir -p backend/frontend
           cp -r frontend/dist/* backend/frontend/
 
+      - name: 📦 Install backend again to include node_modules in release
+        run: |
+          cd backend
+          npm install --omit=dev
+
       - name: 📦 Zip for deployment
         run: |
           cd backend
