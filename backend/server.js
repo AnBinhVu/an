@@ -8,54 +8,64 @@ const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const locationRoutes = require('./routes/locationRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
-const path = require('path');
 const notificationRoutes = require('./routes/notificationRoutes');
 const userRoutes = require('./routes/userRoutes');
 const sessionRoutes = require('./middleware/authMiddleware');
 const planRoutes = require('./routes/planRoutes');
 const vnpayRoutes = require("./routes/vnpayRoutes");
+const path = require('path');
 
 dotenv.config();
 const app = express();
 
-connectDB(); // tách riêng DB ở đây
+// Kết nối database
+connectDB();
+
+// Middleware
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
+// CORS cấu hình cho frontend ở Azure
+app.use(cors({
+  origin: process.env.REACT_APP_API_URL?.replace('/api', ''), // lấy gốc URL của frontend
+  credentials: true
+}));
+
+// Session
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-  cookie: { httpOnly: true, maxAge: 600000 }
+  cookie: {
+    httpOnly: true,
+    maxAge: 600000,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production' // dùng cookie secure nếu chạy production
+  }
 }));
 
-// api cho đăng ký
+// API routes
 app.use('/api/auth', authRoutes);
-
-//api cho danh mục
 app.use('/api/categories', categoryRoutes);
-
-//api cho địa điểm
 app.use('/api/locations', locationRoutes);
-
-//api cho bất động sản
 app.use('/api/properties', propertyRoutes);
-
-// api cho thông báo
 app.use('/api/notifications', notificationRoutes);
-
-//api cho user
 app.use('/api/users', userRoutes);
-
-// api cho session
 app.use('/api/session', sessionRoutes);
-
-// api cho gói đăng ký
 app.use('/api/plans', planRoutes);
-
-// api cho thanh toán VNPay
 app.use('/api/payment', vnpayRoutes);
+
+// Serve React frontend (build từ frontend/dist)
+const frontendPath = path.join(__dirname, '../frontend/dist');
+app.use(express.static(frontendPath));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
+// Server listen
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`🚀 Server running at http://localhost:${PORT}`)
+);
