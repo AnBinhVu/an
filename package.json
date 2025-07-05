@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cd backend && npm start",        // ✅ Azure gọi lệnh này
-    "client": "cd frontend && npm start",      // ✅ dùng khi dev
-    "server": "nodemon backend/server.js",     // ✅ dùng khi dev
+    "start": "cd backend && npm start",        
+    "client": "cd frontend && npm start",      
+    "server": "nodemon backend/server.js",     
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd frontend && npm install && npm run build"  // ✅ build frontend khi cần
+    "build": "cd frontend && npm install && npm run build"  
   },
   "dependencies": {
     "antd": "^5.25.3",
