@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - vubinhan
+name: Build and deploy Node.js + React App to Azure Web App - vubinhan
 
 on:
   push:
@@ -13,26 +10,39 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js version
+      - name: 🟢 Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      - name: 📦 Install backend dependencies
         run: |
+          cd backend
           npm install
-          npm run build --if-present
-          npm run test --if-present
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      - name: ⚛️ Build frontend (React)
+        run: |
+          cd frontend
+          npm install
+          npm run build
+          cd ..
+          # Copy build to backend folder
+          rm -rf backend/frontend
+          mkdir -p backend/frontend
+          cp -r frontend/dist/* backend/frontend/
 
-      - name: Upload artifact for deployment job
+      - name: 📦 Zip for deployment
+        run: |
+          cd backend
+          zip -r ../release.zip .
+
+      - name: ⬆️ Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: node-app
@@ -41,22 +51,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    
-    
+
     steps:
-      - name: Download artifact from build job
+      - name: ⬇️ Download artifact
         uses: actions/download-artifact@v4
         with:
           name: node-app
 
-      - name: Unzip artifact for deployment
+      - name: 📂 Unzip artifact
         run: unzip release.zip
-      
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
+
+      - name: 🚀 Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'vubinhan'
+          app-name: 'vubinhan-hya7e4dyhag3efc0'  # tên chính xác của Web App Azure
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0A41AEF387D74CCF8302FD45EE63DBF6 }}
