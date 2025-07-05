@@ -3,42 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cd backend && npm start",        
-    "client": "cd frontend && npm start",      
-    "server": "nodemon backend/server.js",     
+    "start": "cd backend && npm start",
+    "client": "cd frontend && npm start",
+    "server": "nodemon backend/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd frontend && npm install && npm run build"  
-  },
-  "dependencies": {
-    "antd": "^5.25.3",
-    "axios": "^1.8.4",
-    "bcryptjs": "^3.0.2",
-    "cloudinary": "^1.41.3",
-    "connect-mongo": "^5.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
-    "jsonwebtoken": "^9.0.2",
-    "moment": "^2.30.1",
-    "mongoose": "^8.13.2",
-    "multer": "^2.0.0",
-    "multer-storage-cloudinary": "^4.0.0",
-    "passport": "^0.7.0",
-    "qs": "^6.14.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0",
-    "react-quill": "^2.0.0",
-    "react-router-dom": "^6.30.0",
-    "react-scripts": "^5.0.1",
-    "react-toastify": "^11.0.5"
+    "build": "cd frontend && npm install && npm run build"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
-    "nodemon": "^3.1.9",
-    "postcss": "^8.5.4",
-    "tailwindcss": "^4.1.8"
+    "nodemon": "^3.1.9"
   }
 }
