@@ -8,9 +8,22 @@ const FeaturedListings = () => {
   const fetchProperties = async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/properties`);
-      setProperties(res.data);
+      console.log('✅ Dữ liệu trả về từ API:', res.data);
+
+      // Trường hợp trả về mảng trực tiếp
+      if (Array.isArray(res.data)) {
+        setProperties(res.data);
+      }
+      // Trường hợp dữ liệu nằm trong thuộc tính "data"
+      else if (Array.isArray(res.data?.data)) {
+        setProperties(res.data.data);
+      } else {
+        console.warn('⚠️ Dữ liệu không phải mảng:', res.data);
+        setProperties([]);
+      }
     } catch (error) {
-      console.error('Lỗi khi lấy danh sách bất động sản:', error);
+      console.error('❌ Lỗi khi lấy danh sách bất động sản:', error);
+      setProperties([]);
     } finally {
       setLoading(false);
     }
