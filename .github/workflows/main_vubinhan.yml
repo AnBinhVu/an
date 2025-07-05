@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - vubinhan
+name: Build and deploy React App to Azure Web App - vubinhan
 
 on:
   push:
@@ -13,47 +10,53 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js version
+      - name: 🟢 Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22.x'
+          node-version: '20.x'
 
-      - name: npm install, build, and test
+      - name: 📦 Install dependencies (frontend)
+        working-directory: ./frontend
+        run: npm install
+
+      - name: ⚛️ Build React App
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: 📦 Zip React build for deployment
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          cd frontend/build
+          zip -r ../../release.zip .
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment job
+      - name: ⬆️ Upload artifact for deploy
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
+          name: react-app
           path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    
-    
+
     steps:
-      - name: Download artifact from build job
+      - name: ⬇️ Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: react-app
 
-      - name: Unzip artifact for deployment
+      - name: 📂 Unzip artifact
         run: unzip release.zip
-      
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
+
+      - name: 💤 Wait before deployment (fix SCM container restart)
+        run: sleep 30
+
+      - name: 🚀 Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'vubinhan'
