@@ -32,7 +32,7 @@ jobs:
           npm install
           npm run build
           cd ..
-          # Copy build to backend folder
+          # Copy frontend build into backend
           rm -rf backend/frontend
           mkdir -p backend/frontend
           cp -r frontend/dist/* backend/frontend/
@@ -64,7 +64,7 @@ jobs:
       - name: 🚀 Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'vubinhan-hya7e4dyhag3efc0'                # ✅ tên chính xác Web App
-          slot-name: 'production'                              # ✅ phải là chữ thường
+          app-name: 'vubinhan-hya7e4dyhag3efc0'             # ✅ Tên app chính xác
+          slot-name: 'production'                           # ✅ Slot mặc định (chữ thường)
           package: .
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # ✅ sửa tên biến đúng với secret
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # ✅ Secret đúng
