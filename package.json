@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon backend/server.js",
-    "client": "cd frontend && npm start"
+    "start": "cd backend && npm start",        // ✅ Azure gọi lệnh này
+    "client": "cd frontend && npm start",      // ✅ dùng khi dev
+    "server": "nodemon backend/server.js",     // ✅ dùng khi dev
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd frontend && npm install && npm run build"  // ✅ build frontend khi cần
   },
   "dependencies": {
     "antd": "^5.25.3",
@@ -30,8 +32,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.30.0",
     "react-scripts": "^5.0.1",
-    "react-toastify": "^11.0.5",
-    "web-rbnd": "file:"
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
