@@ -8,7 +8,7 @@ const FeaturedListings = () => {
   const fetchProperties = async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/properties`);
-      setProperties(Array.isArray(res.data) ? res.data : []); // ✅ Kiểm tra là mảng
+      setProperties(Array.isArray(res.data) ? res.data : []); // ✅ Kiểm tra là mảng 
     } catch (error) {
       console.error('Lỗi khi lấy danh sách bất động sản:', error);
     } finally {
