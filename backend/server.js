@@ -57,7 +57,7 @@ app.use('/api/plans', planRoutes);
 app.use('/api/payment', vnpayRoutes);
 
 // Serve React frontend (build từ frontend/build)
-const frontendPath = path.join(__dirname, '/frontend');
+const frontendPath = path.join(__dirname, '');
 app.use(express.static(frontendPath));
 
 app.get('*', (req, res) => {
