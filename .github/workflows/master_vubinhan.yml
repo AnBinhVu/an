@@ -66,13 +66,17 @@ jobs:
       contents: read #This is required for actions/checkout
 
     steps:
-      - name: Download artifact from build job
+      - name: ⬇️ Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: fullstack-app
 
-      - name: Unzip artifact for deployment
+      - name: 📂 Unzip artifact
         run: unzip release.zip
+
+      - name: 💤 Wait before deployment (fix SCM container restart)
+        run: sleep 30
+
       
       - name: Login to Azure
         uses: azure/login@v2
